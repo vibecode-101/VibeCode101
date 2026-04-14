@@ -1,12 +1,30 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Badge, CheckCircle2, Users, Clock, Loader2, Radio, Building2, Tag, Sparkles } from "lucide-react";
+import { Badge as BadgeIcon, CheckCircle2, Users, Clock, Loader2, Radio, Building2, Tag, Sparkles } from "lucide-react";
 import { useState } from "react";
 
 const isEarlyBird = import.meta.env.VITE_PRICING_PHASE !== "regular";
 
 const tiers = [
+  {
+    slug: "attendee",
+    name: "Attendee",
+    description: "Watch all live sessions free. Platform access included — no badge required.",
+    earlyBird: null as number | null,
+    regular: null as number | null,
+    perks: [
+      "All Live Broadcast Sessions — June 5–7",
+      "VibeCODE Expo Platform Access",
+      "Discord Community (330+ Members)",
+      "AI Concierge",
+    ],
+    cta: "Join Free",
+    accent: "primary" as const,
+    featured: false,
+    badge: "Free",
+    roleNote: null,
+  },
   {
     slug: "vip",
     name: "VIP",
@@ -133,7 +151,15 @@ const pricingFaqs = [
   },
 ];
 
-function PriceDisplay({ earlyBird, regular }: { earlyBird: number; regular: number }) {
+function PriceDisplay({ earlyBird, regular }: { earlyBird: number | null; regular: number | null }) {
+  if (earlyBird === null) {
+    return (
+      <div className="mb-8">
+        <span className="text-6xl font-bold text-emerald-400">Free</span>
+        <span className="text-muted-foreground dark:text-white/60 text-sm font-mono uppercase tracking-widest ml-3">Always</span>
+      </div>
+    );
+  }
   if (isEarlyBird) {
     return (
       <div className="mb-8">
@@ -153,11 +179,18 @@ function PriceDisplay({ earlyBird, regular }: { earlyBird: number; regular: numb
   );
 }
 
+const VCE_REGISTER_URL = "https://vibecode-101.com/register";
+
 function TierCard({ tier }: { tier: typeof tiers[0] }) {
   const checkColor = tier.accent === "secondary" ? "text-secondary" : "text-primary";
   const [loading, setLoading] = useState(false);
+  const isFree = tier.earlyBird === null;
 
   const handleCheckout = async () => {
+    if (isFree) {
+      window.open(VCE_REGISTER_URL, "_blank", "noopener,noreferrer");
+      return;
+    }
     setLoading(true);
     try {
       const BASE = import.meta.env.BASE_URL;

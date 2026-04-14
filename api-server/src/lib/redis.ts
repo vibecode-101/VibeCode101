@@ -12,6 +12,14 @@ export const redis = new Redis(REDIS_URL, {
 redis.on("connect", () => logger.info("Redis connected (vc101)"));
 redis.on("error", (err) => logger.error({ err }, "Redis error (vc101)"));
 
+export async function connectRedis() {
+  try {
+    await redis.connect();
+  } catch (err) {
+    logger.warn({ err }, "Redis unavailable — running without cache");
+  }
+}
+
 // ── Namespace keys ──────────────────────────────────────────────────────────
 export const KEYS = {
   project: (id: string) => `vc101:project:${id}`,

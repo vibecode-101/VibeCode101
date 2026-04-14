@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Zap, ArrowRight, MapPin, Sun, Moon, Send, Sparkles, Loader2, Flame, GraduationCap, Presentation, Layers, CalendarDays, Badge, MessageCircleQuestion, Handshake } from "lucide-react";
+import { Zap, ArrowRight, MapPin, Sun, Moon, Send, Sparkles, Loader2, Flame, GraduationCap, Presentation, Layers, CalendarDays, Badge as BadgeIcon, MessageCircleQuestion, Handshake } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SpatialProvider, RoomData } from "@/components/spatial/SpatialProvider";
 import { SpatialViewport } from "@/components/spatial/SpatialViewport";
@@ -20,6 +20,7 @@ import SponsorsRoom from "@/components/rooms/SponsorsRoom";
 import PromoBriefing from "@/components/PromoBriefing";
 import { NewsFeedSimulation } from "@/components/NewsFeedSimulation";
 import { VirtualMeetingSimulation } from "@/components/VirtualMeetingSimulation";
+import { BadgeShowcaseSection } from "@/components/ExpoAttendanceBadge";
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -330,6 +331,8 @@ function LandingContent() {
           </div>
         </div>
       </section>
+
+      <BadgeShowcaseSection onGetBadge={() => navigateToRoom("pricing")} />
 
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-6">
