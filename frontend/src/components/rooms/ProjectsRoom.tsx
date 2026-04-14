@@ -1,24 +1,54 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Layers, Heart, Trophy, ArrowRight } from "lucide-react";
-import { useSpatial } from "@/components/spatial/SpatialProvider";
+import { Layers, Heart, Rocket, ExternalLink, Trophy } from "lucide-react";
+import { useChatContext } from "@/components/ChatProvider";
 
 const BASE = import.meta.env.BASE_URL;
 
 const projects = [
-  { name: "Synapse Workspace", author: "Team Alpha", desc: "An AI-powered collaborative workspace that adapts to your workflow and suggests next steps.", votes: 342, img: `${BASE}images/gallery-warm.png`, tags: ["AI Apps"], stack: ["React", "OpenAI", "Supabase"] },
-  { name: "FlowState Tracker", author: "Elena R.", desc: "A minimalist productivity app that tracks your coding flow state and optimizes your schedule.", votes: 289, img: `${BASE}images/hero-warm.png`, tags: ["Beginner Builds"], stack: ["React", "Tailwind", "localStorage"] },
-  { name: "Cosmic Analytics", author: "DevSquad", desc: "Beautiful real-time analytics dashboard with AI-generated insights and anomaly detection.", votes: 415, img: `${BASE}images/masterclass-warm.png`, tags: ["Developer Tools"], stack: ["Next.js", "D3", "Vercel AI"] },
-  { name: "VibeBoard", author: "Marcus T.", desc: "A collaborative mood board tool for designers that uses AI to suggest complementary colors and layouts.", votes: 198, img: `${BASE}images/project-1.png`, tags: ["Creative Tools"], stack: ["React", "Canvas API", "GPT-4"] },
-  { name: "PitchPal", author: "Sarah & Co.", desc: "AI agent that researches investors, enriches contact info, and drafts personalized outreach emails.", votes: 523, img: `${BASE}images/orlando-vibe.png`, tags: ["AI Apps"], stack: ["AiAssist.net", "Apollo API", "Airtable"] },
-  { name: "LearnLoop", author: "First Timer", desc: "A flashcard app that generates questions from any topic using AI, built in a single weekend.", votes: 156, img: `${BASE}images/hero-warm.png`, tags: ["Beginner Builds"], stack: ["React", "OpenAI", "Replit"] },
+  {
+    name: "AiAssist.net",
+    author: "Interchained LLC",
+    desc: "The AI integration platform powering this event. Multi-provider workspace management, agentic tooling, and developer APIs. The AI Concierge you're chatting with runs on it.",
+    votes: 0,
+    img: `${BASE}images/hero-warm.png`,
+    tags: ["Developer Tools"],
+    stack: ["Node.js", "Redis", "Multi-LLM"],
+    url: "https://aiassist.net",
+  },
+  {
+    name: "SaaS Signal",
+    author: "Mark Allen Evans Jr.",
+    desc: "Lead intelligence and social network radar for B2B SaaS founders. Find warm signals, track buyer intent, and surface the right conversations before your competitors do.",
+    votes: 0,
+    img: `${BASE}images/gallery-warm.png`,
+    tags: ["AI Apps"],
+    stack: ["React", "AI", "Replit"],
+    url: "https://saas-signal.com",
+  },
+  {
+    name: "Browse With Me",
+    author: "Mark Allen Evans Jr.",
+    desc: "BYOK Chrome extension with 11+ LLM providers. Bring your own API key and browse the web with any AI model — GPT, Claude, Gemini, Grok, and more — natively in your browser.",
+    votes: 0,
+    img: `${BASE}images/masterclass-warm.png`,
+    tags: ["Developer Tools"],
+    stack: ["Chrome Extension", "11+ LLMs", "BYOK"],
+    url: "https://chromewebstore.google.com/detail/browse-with-me/nkagfgeicapojbajghpilgpckignfhpe",
+  },
 ];
 
-const categories = ["All", "AI Apps", "Creative Tools", "Developer Tools", "Beginner Builds"];
+const categories = ["All", "AI Apps", "Developer Tools"];
 
 export default function ProjectsRoom() {
-  const { navigateToRoom } = useSpatial();
+  const { sendMessage, setIsOpen } = useChatContext();
+
+  async function openSubmitFlow() {
+    setIsOpen(true);
+    await sendMessage("I want to submit my project for Demo Day!");
+  }
+
   return (
     <div className="py-16 md:py-24">
       <div className="container mx-auto px-6">
@@ -76,10 +106,18 @@ export default function ProjectsRoom() {
                             </Button>
                           </div>
                           <p className="text-sm text-muted-foreground font-light mb-4 line-clamp-2">{project.desc}</p>
-                          <div className="flex flex-wrap gap-1.5">
-                            {project.stack.map((tech) => (
-                              <Badge key={tech} variant="outline" className="text-[10px] px-2 py-0.5 rounded-full border-border">{tech}</Badge>
-                            ))}
+                          <div className="flex items-center justify-between">
+                            <div className="flex flex-wrap gap-1.5">
+                              {project.stack.map((tech) => (
+                                <Badge key={tech} variant="outline" className="text-[10px] px-2 py-0.5 rounded-full border-border">{tech}</Badge>
+                              ))}
+                            </div>
+                            {project.url && (
+                              <a href={project.url} target="_blank" rel="noopener noreferrer"
+                                className="ml-2 shrink-0 flex items-center gap-1 text-[11px] text-primary hover:opacity-80 transition-opacity">
+                                <ExternalLink className="w-3 h-3" /> Visit
+                              </a>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -90,10 +128,11 @@ export default function ProjectsRoom() {
           ))}
         </Tabs>
 
+        {/* Submit CTA */}
         <div className="mt-20">
           <div className="holo-card holo-glow holo-specular group">
-            <div className="relative z-[2] flex flex-col md:flex-row items-center justify-between bg-card p-10 md:p-12 rounded-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none"></div>
+            <div className="relative z-[2] flex flex-col md:flex-row items-center justify-between bg-card p-10 md:p-12 rounded-2xl overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none" />
               <div className="relative z-10 mb-8 md:mb-0 max-w-xl">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center">
@@ -102,17 +141,22 @@ export default function ProjectsRoom() {
                   <h3 className="text-3xl font-bold text-foreground">Submit Your Project</h3>
                 </div>
                 <p className="text-muted-foreground text-lg font-light leading-relaxed">
-                  Earn digital badges, finalist ribbons, and physical awards at the closing ceremony. Every shipped project gets a builder badge.
+                  Earn digital badges, finalist ribbons, and physical awards at the closing ceremony. Talk to our AI agent — it'll get you on the board in under 2 minutes.
                 </p>
               </div>
               <div className="relative z-10 shrink-0 w-full md:w-auto">
-                <Button size="lg" onClick={() => navigateToRoom("syllabus")} className="w-full md:w-auto h-14 px-8 rounded-full bg-primary text-white hover:bg-primary/90 text-lg shadow-[0_0_20px_rgba(235,90,30,0.3)]">
-                  View Guidelines <ArrowRight className="ml-2 w-5 h-5" />
+                <Button
+                  size="lg"
+                  onClick={openSubmitFlow}
+                  className="w-full md:w-auto h-14 px-8 rounded-full bg-primary text-white hover:bg-primary/90 text-lg shadow-[0_0_20px_rgba(235,90,30,0.3)]"
+                >
+                  <Rocket className="mr-2 w-5 h-5" /> Submit Your Project
                 </Button>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );

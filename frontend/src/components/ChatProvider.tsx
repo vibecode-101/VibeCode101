@@ -1,6 +1,17 @@
 import React, { createContext, useContext, useState, useCallback, useRef } from "react";
 
-export type ChatMessage = { role: "user" | "assistant"; content: string; toolsUsed?: string[] };
+export type ConfirmForm = {
+  name: string; tagline: string; description: string;
+  url: string; githubUrl: string; stack: string[];
+  category: string; builderName: string; email: string;
+};
+
+export type ChatMessage = {
+  role: "user" | "assistant";
+  content: string;
+  toolsUsed?: string[];
+  confirmForm?: ConfirmForm;
+};
 
 type ChatAction = { type: string; target: string };
 
@@ -83,6 +94,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         role: "assistant",
         content: data.message,
         toolsUsed: data.toolsUsed,
+        confirmForm: data.confirmForm ?? undefined,
       };
       setMessages((prev) => [...prev, assistantMsg]);
       setIsLoading(false);

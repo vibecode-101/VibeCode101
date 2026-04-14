@@ -1,0 +1,292 @@
+Vibe Code Expo: The MasterClass & Expo
+A Live Event by AiAssist.net
+June 5–7, 2026 | Orlando, FL — International Drive
+Code the vibe. Share the work.
+
+Vibe coding isn't about perfectly architected monoliths or memorizing syntax. It's about flow state. It's about having an idea at 10 PM and a working prototype by 2 AM using AI.
+
+Vibe Code Expo is the creative, community-driven builder experience where beginners, creators, and founders come together to learn vibe coding, submit projects, and earn recognition — all in 3 days, live in Orlando.
+
+Whether you're a founder prototyping an MVP, a designer exploring interactions, or a student shipping your first app — this is your arena. Your first build belongs on stage too.
+
+The Numbers
+3 Days of non-stop building and learning
+500+ Builders from beginners to seasoned devs
+20+ Masterclasses — industry pros guiding your build
+9 Modules — complete beginner-to-builder pathway
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+9-Module Syllabus: From Idea to Demo Day
+
+The Vibe Code Expo pathway is designed for absolute beginners. We'll take you from a blank canvas to a shipped project ready for the gallery.
+
+Module 1: The Setup
+Environment configuration, mental models for AI-assisted development, and setting up your first project. Tools: Cursor, Replit, GitHub Copilot
+
+Module 2: The UI Vibe
+Crafting beautiful interfaces with Tailwind CSS, shadcn/ui, and component libraries. Building responsive layouts that look professional from day one. Tools: Tailwind, shadcn/ui, Figma
+
+Module 3: The Logic
+State management, React hooks, connecting UI to functionality, and handling user input to make your app interactive. Tools: React, TypeScript, Zustand
+
+Module 4: The Backend
+Databases, APIs, and auth simplified. Setting up Supabase/Postgres, REST endpoints, and server functions. Tools: Supabase, Drizzle ORM, Express
+
+Module 5: AI Integration
+Adding AI to your app: chat interfaces, streaming responses, structured outputs, and prompt engineering basics. Tools: AiAssist.net API, OpenAI SDK, Vercel AI SDK
+
+Module 6: AI Agents for Founders
+Building AI agents that help founders locate and enrich contacts for investors and journalists. Contact enrichment pipelines, data scraping ethics, CRM integration. Tools: AiAssist.net Agents, Apollo/Hunter APIs, Airtable
+
+Module 7: The Polish
+Animations, micro-interactions, glassmorphism, dark mode, responsive design, and accessibility for a premium feel. Tools: Framer Motion, CSS Animations
+
+Module 8: The Ship
+Deployment, domains, analytics, SEO basics, and your launch checklist to get your project live. Tools: Vercel, GitHub Actions
+
+Module 9: The Pitch
+Presenting your project: demo day prep, storytelling for builders, recording demos, and building a portfolio. Tools: Loom, Notion
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Master Classes (20 Sessions)
+
+No fluff, no theory slides. These are live, hands-on sessions where we build, break, and fix things in front of you. Small groups. Real code. Hard-earned lessons.
+
+— KEYNOTE —
+
+Opening Keynote: The Model Showdown — GPT vs Claude vs Gemini vs Grok vs Kimi — Live
+Mark Allen Evans Jr | Day 1, 9:00 AM | Main Stage
+The headliner. We give identical coding tasks to GPT-5.4, Claude Sonnet 4.6, Gemini 3.1 Pro, Grok 4.20, and Kimi K2 — then compare outputs live on stage. Which writes better React? Which reasons through complex logic? Which follows multi-step instructions? Real benchmarks, real edge cases, and the model-switching strategies top builders actually use.
+
+— VIBE FOUNDATIONS (7 Sessions) —
+
+Training Your AI: Directives, Constraints, Persona & Tone
+Mark Allen Evans Jr | Day 1, 10:30 AM | Main Stage | All Levels
+The secret to consistent AI output isn't better prompts — it's better system directives. Learn how to set constraints, define personas, control tone, enforce coding standards, and build reusable directive templates that make every model behave like your senior engineer.
+
+Vibe Coding UI/UX: The Pain Points Nobody Warns You About
+Elena Rodriguez | Day 1, 12:00 PM | Room A | All Levels
+AI-generated UIs look "fine" until you ship them. We'll expose the real pain points — inconsistent spacing, inaccessible color combos, broken mobile layouts, phantom components, and the "it looks like every other AI app" problem. Plus: which models to use for design vs logic vs layout.
+
+Vibe Backend: Databases, Python & Node.js — Both Runtimes, One Brain
+Mark Allen Evans Jr | Day 1, 2:00 PM | Main Stage | Intermediate
+Your AI can't save you if you don't understand your database. We'll switch between Python and Node.js live — showing how easy it is to use either runtime for the same tasks. ORM patterns, migration workflows, FastAPI vs Express, Drizzle vs SQLAlchemy, and a special deep dive into Redis namespace architecture — the technique Mark uses to structure caching, sessions, and real-time data across services. The stuff we learned the hard way. Attend to find out.
+
+Vibe Coding Mistakes: The Hall of Shame (And How to Avoid Them)
+Marcus Thorne | Day 1, 3:30 PM | Room A | Beginner
+Hallucinated imports, phantom dependencies, circular logic, security holes AI won't warn you about, and the classic "it works in the prompt but breaks in production." We've made every mistake so you don't have to. Real examples, real fixes, real talk.
+
+Ship It Live: From Vibe Code to Production in One Session
+Jade Monroe | Day 1, 4:00 PM | Room B | Beginner
+Your first deploy shouldn't be scary. We'll take a vibe-coded app from "it works on my machine" to live on the internet — custom domain, SSL, database, the works. Vercel, Replit Deployments, and the launch checklist every builder needs.
+
+Building Your AI Stack: Which Model for What Task
+Mark Allen Evans Jr | Day 3, 4:30 PM | Main Stage | All Levels
+No single model does everything best. We'll map out which AI to use for UI generation, backend logic, debugging, writing tests, documentation, and creative work. Leave with a personal AI stack that plays to each model's strengths.
+
+— PROVIDER DEEP DIVES (11 Sessions) —
+
+Vibe Coding with Replit Agent: From Idea to Deployed App
+Mark Allen Evans Jr | Day 1, 5:00 PM | Room A | Beginner
+Replit Agent turns natural language into full-stack apps. We'll go from a one-sentence idea to a live, deployed application — databases, auth, and all. Learn the prompting patterns that make Agent shine and the gotchas that trip up new builders.
+
+Vibe Coding with Cursor: The Power-User Workflow
+Alex Chen | Day 2, 9:00 AM | Room A | Intermediate
+Cursor is the IDE that vibe coders swear by. We'll cover Composer mode, multi-file edits, codebase-aware chat, .cursorrules files, and the keyboard shortcuts that make you 10x faster. This is how the pros actually use it — not the YouTube tutorial version.
+
+Vibe Coding with GitHub Copilot: Beyond Autocomplete
+Samira Osei | Day 2, 10:30 AM | Room B | Intermediate
+Copilot is more than tab-complete. We'll dig into Copilot Chat, workspace agents, slash commands, inline suggestions, and how to pair it with other tools. Plus: GitHub Copilot Workspace for planning entire features from issues.
+
+Vibe Coding with ChatGPT / OpenAI: The Swiss Army Knife
+Priya Patel | Day 2, 12:00 PM | Room A | All Levels
+ChatGPT is most people's first AI tool — but most people barely scratch the surface. We'll cover GPTs, custom instructions, Code Interpreter for data work, canvas mode for iteration, and the API patterns that let you build ChatGPT into your own apps.
+
+Vibe Coding with Claude: Long Context & Artifacts Mastery
+Mark Allen Evans Jr | Day 2, 1:30 PM | Main Stage | All Levels
+Claude's 200K context window and Artifacts feature make it the best model for large codebases and interactive prototypes. We'll explore project knowledge, system prompts that actually work, and how to use Claude for architecture decisions, not just code generation.
+
+Vibe Coding with Gemini: Multimodal Building & Google Integration
+Kai Nakamura | Day 2, 3:00 PM | Room A | All Levels
+Gemini sees images, understands video, and lives inside Google's ecosystem. We'll build apps using screenshot-to-code, design-from-mockup workflows, and Gemini's integration with Firebase, Vertex AI, and Google Workspace. The multimodal future is here.
+
+Vibe Coding with v0 by Vercel: UI Generation That Ships
+Maya Lin | Day 2, 4:30 PM | Room B | Beginner
+v0 generates production-ready React components from text and images. We'll go from rough sketches to polished UI, learn how to iterate with follow-up prompts, export to your codebase, and combine v0 with shadcn/ui for a complete design system.
+
+Vibe Coding with Perplexity: Research-Driven Development
+Tara Singh | Day 3, 9:00 AM | Room A | All Levels
+Perplexity isn't just search — it's your research co-pilot. We'll use it to evaluate libraries, find API documentation, compare architecture patterns, and make informed technical decisions before writing a single line of code. Research first, vibe code second.
+
+Vibe Coding with xAI Grok: Real-Time Data & Unfiltered Answers
+Omar Farouk | Day 3, 10:30 AM | Room B | Intermediate
+Grok has real-time X/Twitter data access and a no-guardrails approach to problem-solving. We'll explore its strengths for trend analysis, real-time data apps, and the coding tasks where its unfiltered reasoning outperforms more cautious models.
+
+Vibe Coding with Groq: Speed-First AI for Real-Time Apps
+Rafael Mendes | Day 3, 12:00 PM | Room A | Intermediate
+Groq's LPU chips deliver inference at insane speeds. We'll build real-time AI features — live transcription, instant chat, streaming code generation — where latency matters. Learn when speed beats intelligence and how to architect for Groq's strengths.
+
+Vibe Coding with Kimi K2: The Open-Source Contender
+Nina Voss | Day 3, 1:30 PM | Room B | Intermediate
+Kimi K2 from Moonshot AI is turning heads with its coding ability. We'll benchmark it against the big names, explore its agentic capabilities, and show you how to self-host and fine-tune an open-weight model for your specific workflows.
+
+— FOUNDER TRACK (2 Sessions) —
+
+AI Agents for Founders: Contact Enrichment & Lead Generation
+Mark Allen Evans Jr | Day 3, 3:00 PM | Main Stage | Intermediate
+Build AI agents that find investors, enrich contacts, and automate outreach. We'll cover data scraping ethics, CRM integration, enrichment pipelines, and the exact agent workflows we use at AiAssist.net. This is the founder's secret weapon.
+
+Demo Day Prep: Present Your Build Like a Pro
+Mark Allen Evans Jr | Day 3, 5:30 PM | Main Stage | All Levels
+You built something amazing — now sell it. Storytelling for builders, demo flow, handling live bugs gracefully, and the presentation framework that makes judges and investors pay attention. Your last session before you hit the stage.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+3-Day Schedule
+
+Day 1 — Friday, June 5: Foundations & Flow
+
+8:00 AM — Doors Open & Registration (Main Lobby)
+9:00 AM — Opening Keynote: The Model Showdown — GPT vs Claude vs Gemini vs Grok vs Kimi (Main Stage) — Mark Allen Evans Jr
+10:30 AM — Training Your AI: Directives, Constraints, Persona & Tone (Main Stage) — Mark Allen Evans Jr
+           Module 1: The Setup (Beginner Hall)
+12:00 PM — Vibe Coding UI/UX: The Pain Points Nobody Warns You About (Room A) — Elena Rodriguez
+           Module 2: The UI Vibe (Beginner Hall)
+1:00 PM — Lunch Break (Dining Hall)
+2:00 PM — Vibe Backend: Databases, Python & Node.js — Both Runtimes, One Brain (Main Stage) — Mark Allen Evans Jr
+          Module 3: The Logic (Beginner Hall)
+3:30 PM — Vibe Coding Mistakes: The Hall of Shame (Room A) — Marcus Thorne
+4:00 PM — Ship It Live: From Vibe Code to Production (Room B) — Jade Monroe
+5:00 PM — Vibe Coding with Replit Agent: From Idea to Deployed App (Room A) — Mark Allen Evans Jr
+          Open Build Time (Build Floor)
+7:00 PM — Networking Mixer & Team Formation (Rooftop Lounge)
+
+Day 2 — Saturday, June 6: Provider Deep Dives
+
+8:00 AM — Doors Open & Breakfast (Main Lobby)
+9:00 AM — Vibe Coding with Cursor: The Power-User Workflow (Room A) — Alex Chen
+          Module 4: The Backend (Beginner Hall)
+10:30 AM — Vibe Coding with GitHub Copilot: Beyond Autocomplete (Room B) — Samira Osei
+           Module 5: AI Integration (Beginner Hall)
+12:00 PM — Vibe Coding with ChatGPT / OpenAI: The Swiss Army Knife (Room A) — Priya Patel
+1:00 PM — Lunch Break (Dining Hall)
+1:30 PM — Vibe Coding with Claude: Long Context & Artifacts Mastery (Main Stage) — Mark Allen Evans Jr
+          Module 6: AI Agents for Founders (Beginner Hall)
+3:00 PM — Vibe Coding with Gemini: Multimodal Building & Google Integration (Room A) — Kai Nakamura
+4:30 PM — Vibe Coding with v0 by Vercel: UI Generation That Ships (Room B) — Maya Lin
+          Project Work Time + Office Hours (Build Floor)
+6:00 PM — Lightning Talks: Community Showcase (Main Stage)
+8:00 PM — Late Night Build Session (Build Floor)
+
+Day 3 — Sunday, June 7: Ship & Celebrate
+
+8:00 AM — Doors Open & Breakfast (Main Lobby)
+9:00 AM — Vibe Coding with Perplexity: Research-Driven Development (Room A) — Tara Singh
+          Module 7: The Polish (Beginner Hall)
+10:30 AM — Vibe Coding with xAI Grok: Real-Time Data & Unfiltered Answers (Room B) — Omar Farouk
+           Module 8: The Ship (Beginner Hall)
+12:00 PM — Vibe Coding with Groq: Speed-First AI for Real-Time Apps (Room A) — Rafael Mendes
+           Module 9: The Pitch (Beginner Hall)
+1:00 PM — Lunch & Final Build Time (Dining Hall + Build Floor)
+1:30 PM — Vibe Coding with Kimi K2: The Open-Source Contender (Room B) — Nina Voss
+2:00 PM — Project Submissions Close (Online Portal)
+3:00 PM — AI Agents for Founders: Contact Enrichment & Lead Generation (Main Stage) — Mark Allen Evans Jr
+4:30 PM — Building Your AI Stack: Which Model for What Task (Main Stage) — Mark Allen Evans Jr
+5:30 PM — Demo Day Prep: Present Your Build Like a Pro (Main Stage) — Mark Allen Evans Jr
+6:30 PM — Demo Day: Project Presentations (Main Stage)
+8:00 PM — Awards Ceremony & Closing (Main Stage)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ticket Tiers
+
+General — $49 (Early Bird) / $79
+• Masterclass Access
+• WiFi & Workspace
+• Event Swag
+• Community Voting
+• Discord Access
+
+Builder Pro — $149 (Early Bird) / $249 ⭐ Most Popular
+• Everything in General & Beginner
+• Sponsor Perks (licenses, credits)
+• 1-on-1 Mentor Sessions
+• Live & Post-Event Livestreams
+• Priority Seating
+• Pro Showcase & Web Feature
+
+Beginner Track — $89 (Early Bird) / $129
+• Everything in General
+• 9-Module Guided Pathway
+• Project Reviews from Mentors
+• Beginner Swag Pack
+• Beginner Showcase Slot
+
+Group Discounts
+Bringing 5+ people? Get 15% off all tickets. Teams of 10+ get 25% off. Email founders@vibecode-101.com for custom packages.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Who Is This For?
+
+• Beginners who want to learn to build with AI tools — no coding experience required
+• Founders prototyping MVPs and building investor-ready demos
+• Designers exploring code and interactive design
+• Developers who want to explore AI-assisted development workflows
+• Anyone who's curious about building software with the power of AI
+
+What's Included With Every Ticket
+• Full event access (all 3 days)
+• Breakfast, lunch, snacks, and drinks daily
+• WiFi and workspace
+• Event swag
+• Access to all 20+ masterclasses and keynotes
+• Community project voting
+• Sponsor perks: software licenses, API credits, and memberships
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FAQ
+
+Do I need to know how to code?
+Not at all. The Beginner Track is designed specifically for people who have never written a line of code. We use AI tools and visual builders to help you learn the concepts while actually building something real.
+
+What should I bring?
+A laptop is welcome but not required. If you're selected or qualified to present, you can use our hardware on stage. Just bring yourself and your ideas — we've got the rest covered.
+
+Can I work with a team?
+Yes! You can work solo or in teams of up to 4 people. You can come with a team or form one on Friday night during the kickoff.
+
+Are refunds available?
+Full refunds are available up to 14 days before the event. After that, tickets are transferable to another attendee.
+
+Is food provided?
+Yes! Breakfast, lunch, snacks, and drinks are included with every ticket. We accommodate dietary restrictions — just let us know when you register.
+
+Can I attend virtually?
+This is an in-person event, but Builder Pro ticket holders get access to live and post-event livestreams of select sessions.
+
+Where is the event?
+International Drive, Orlando, FL. Exact venue address shared with ticket holders 2 weeks before the event. Free parking available. Easy access from MCO airport.
+
+What are the event hours?
+Doors open at 8 AM each day. Day 1 and 2 end around 9 PM. Day 3 (Demo Day) ends at 8 PM after the awards ceremony.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ecosystem Leaders & Sponsors
+Platinum: AiAssist.net
+Interested in sponsoring? Email founders@vibecode-101.com
+
+Tools You'll Learn
+Cursor · Replit · GitHub Copilot · React · TypeScript · Tailwind CSS · shadcn/ui · Zustand · Supabase · Drizzle ORM · Express · OpenAI SDK · Vercel AI SDK · AiAssist.net API · AiAssist.net Agents · Framer Motion · Figma · Loom · Notion · Airtable + MORE
+
+Connect With Us
+🌐 vibecode-expo.com
+🐦 x.com/vibecode101
+💻 github.com/vibecode-101
+✉️ founders@vibecode-101.com
+
+© 2026 AiAssist.net. All rights reserved. Orlando, FL.

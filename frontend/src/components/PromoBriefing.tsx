@@ -46,10 +46,10 @@ const scenes: Scene[] = [
     content: (
       <div>
         <img src={`${BASE}images/logo-vibe-code-alt.png`} alt="Vibe Code 101" className="promo-hero-logo" />
-        <div className="promo-eyebrow">Orlando, FL &bull; International Drive</div>
+        <div className="promo-eyebrow">Live Globally &bull; In-Person Hubs &bull; Orlando, FL Inaugural</div>
         <h2 className="promo-mega mt-5">Enter the <span className="promo-accent">Arena</span>.</h2>
         <div className="promo-date">June 5–7, 2026</div>
-        <p className="promo-sub">500+ Builders. 20+ Masterclasses. One mission: Build. Ship. Be Seen.</p>
+        <p className="promo-sub">500+ Builders. 20+ Masterclasses. One live broadcast. Everywhere at once.</p>
       </div>
     ),
   },

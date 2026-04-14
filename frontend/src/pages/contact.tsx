@@ -110,7 +110,7 @@ export default function Contact() {
                         <select ref={subjectRef} className="w-full px-4 py-3 rounded-xl bg-muted/50 dark:bg-white/5 border border-border text-foreground text-sm focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all">
                           <option>General Inquiry</option>
                           <option>Sponsorship</option>
-                          <option>Group Tickets</option>
+                          <option>Group Badges</option>
                           <option>Speaking Opportunity</option>
                           <option>Press & Media</option>
                           <option>Accessibility</option>

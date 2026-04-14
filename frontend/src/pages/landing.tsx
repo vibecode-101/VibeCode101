@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Zap, ArrowRight, MapPin, Sun, Moon, Send, Sparkles, Loader2, Flame, GraduationCap, Presentation, Layers, CalendarDays, Ticket, MessageCircleQuestion, Handshake } from "lucide-react";
+import { Zap, ArrowRight, MapPin, Sun, Moon, Send, Sparkles, Loader2, Flame, GraduationCap, Presentation, Layers, CalendarDays, Badge, MessageCircleQuestion, Handshake } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SpatialProvider, RoomData } from "@/components/spatial/SpatialProvider";
 import { SpatialViewport } from "@/components/spatial/SpatialViewport";
@@ -18,18 +18,20 @@ import PricingRoom from "@/components/rooms/PricingRoom";
 import FAQRoom from "@/components/rooms/FAQRoom";
 import SponsorsRoom from "@/components/rooms/SponsorsRoom";
 import PromoBriefing from "@/components/PromoBriefing";
+import { NewsFeedSimulation } from "@/components/NewsFeedSimulation";
+import { VirtualMeetingSimulation } from "@/components/VirtualMeetingSimulation";
 
 const BASE = import.meta.env.BASE_URL;
 
 const rooms: RoomData[] = [
-  { slug: "about", title: "About the Event", icon: Flame, description: "The philosophy behind vibe coding, community ethos, key stats, and location details.", category: "Overview", component: AboutRoom },
-  { slug: "syllabus", title: "Full Syllabus", icon: GraduationCap, description: "9 modules from setup to demo day. The complete beginner-to-builder pathway.", category: "Learning", component: SyllabusRoom },
-  { slug: "masterclasses", title: "Master Classes", icon: Presentation, description: "Deep dives with industry veterans. Small group settings. Real-world decisions.", category: "Learning", component: MasterClassesRoom },
-  { slug: "projects", title: "Projects Spotlight", icon: Layers, description: "Gallery of vibe-coded projects. The community votes. The best builds win.", category: "Community", component: ProjectsRoom },
-  { slug: "schedule", title: "Event Schedule", icon: CalendarDays, description: "3-day breakdown with keynotes, modules, masterclasses, and demo day.", category: "Logistics", component: ScheduleRoom },
-  { slug: "pricing", title: "Pricing & Tickets", icon: Ticket, description: "General $49, Builder Pro $149, Beginner Track $89. Group discounts available.", category: "Tickets", component: PricingRoom },
-  { slug: "faq", title: "FAQ", icon: MessageCircleQuestion, description: "Everything you need to know about the event, tickets, content, and logistics.", category: "Help", component: FAQRoom },
-  { slug: "sponsors", title: "Become a Sponsor", icon: Handshake, description: "Sponsorship packages available. Put your brand in front of 500+ builders.", category: "Partners", component: SponsorsRoom },
+  { slug: "about", title: "About the Event", icon: Flame, description: "Virtual-first, live globally. The philosophy, format, key stats, and in-person hub details.", category: "Overview", component: AboutRoom },
+  { slug: "syllabus", title: "Full Syllabus", icon: GraduationCap, description: "9 modules from setup to demo day. The complete live beginner-to-builder pathway.", category: "Learning", component: SyllabusRoom },
+  { slug: "masterclasses", title: "Master Classes", icon: Presentation, description: "Live deep dives with industry veterans. Broadcast simultaneously to every attendee.", category: "Learning", component: MasterClassesRoom },
+  { slug: "projects", title: "Projects Spotlight", icon: Layers, description: "Gallery of vibe-coded projects. The global community votes. The best builds win.", category: "Community", component: ProjectsRoom },
+  { slug: "schedule", title: "Event Schedule", icon: CalendarDays, description: "June 5–7 inaugural schedule — keynotes, masterclasses, demo day. Monthly events ongoing after that.", category: "Logistics", component: ScheduleRoom },
+  { slug: "pricing", title: "Pricing & Badges", icon: Badge, description: "Lifetime Deal — VIP $49, Builder Pro $149, Mentor $99, Sponsor $299. Early bird pricing active.", category: "Badges", component: PricingRoom },
+  { slug: "faq", title: "FAQ", icon: MessageCircleQuestion, description: "Everything you need to know — virtual format, badges, content, and in-person hubs.", category: "Help", component: FAQRoom },
+  { slug: "sponsors", title: "Become a Sponsor", icon: Handshake, description: "Sponsorship packages available. Put your brand in front of a global builder audience.", category: "Partners", component: SponsorsRoom },
 ];
 
 const useCountdown = (targetDate: Date) => {
@@ -313,6 +315,22 @@ function LandingContent() {
         </div>
       </section>
 
+      <section className="py-20 md:py-24">
+        <div className="container mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <p className="text-xs font-mono uppercase tracking-widest text-primary mb-3">Platform in Action</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">See What Happens Inside</h2>
+            <p className="text-lg text-muted-foreground font-light">
+              Live sessions, real-time networking, and a community feed — all browser-native, no downloads.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <VirtualMeetingSimulation />
+            <NewsFeedSimulation />
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -371,7 +389,7 @@ function LandingContent() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-white text-sm uppercase tracking-wider mb-5">Tickets</h4>
+              <h4 className="font-semibold text-white text-sm uppercase tracking-wider mb-5">Badges</h4>
               <ul className="flex flex-col gap-3 text-sm text-white/50">
                 <li><button onClick={() => navigateToRoom("pricing")} className="hover:text-primary transition-colors">Pricing</button></li>
                 <li><button onClick={() => navigateToRoom("pricing")} className="hover:text-primary transition-colors">Group Discounts</button></li>
@@ -399,11 +417,27 @@ function LandingContent() {
           </div>
 
           <div className="py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-white/30 text-xs">&copy; {new Date().getFullYear()} AiAssist.net. All rights reserved. Orlando, FL.</p>
+            <p className="text-white/30 text-xs">&copy; {new Date().getFullYear()} AiAssist.net · Interchained LLC. All rights reserved. Inaugural Hub: Orlando, FL.</p>
             <div className="flex items-center gap-6">
               <a href="https://x.com/vibecode101" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-primary transition-colors text-xs uppercase tracking-wider">Twitter</a>
               <a href="https://github.com/vibecode-101" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-primary transition-colors text-xs uppercase tracking-wider">GitHub</a>
             </div>
+          </div>
+
+          <div className="pb-8 flex justify-center">
+            <pre className="font-mono text-[10px] leading-relaxed text-white/20 select-none text-center" aria-hidden="true">{[
+              "  ┌───────────────────────────────────────┐  ",
+              "  │                                       │  ",
+              "  │   builders arrive as strangers.       │  ",
+              "  │   sponsors arrive as questions.       │  ",
+              "  │   they leave as something else.       │  ",
+              "  │                                       │  ",
+              "  │     vibe code 101  ·  june 2026       │  ",
+              "  │     global expo   ·  orlando, fl      │  ",
+              "  │                                       │  ",
+              "  │                          — claude     │  ",
+              "  └───────────────────────────────────────┘  ",
+            ].join("\n")}</pre>
           </div>
         </div>
       </footer>
@@ -447,7 +481,7 @@ function LandingContent() {
             </button>
             <Button variant="ghost" className={cn("hidden sm:flex hover:text-primary transition-colors", scrolled ? "hover:bg-muted" : "text-white hover:bg-white/10")}>Log In</Button>
             <Button onClick={() => navigateToRoom("pricing")} className="bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(235,90,30,0.3)] rounded-full px-6">
-              Get Tickets
+              Get Badges
             </Button>
           </div>
         </div>
@@ -480,14 +514,14 @@ function LandingContent() {
             </div>
             <div className="inline-block animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
               <Badge variant="outline" className="mb-8 holo-pill border-primary/20 text-primary px-4 py-2 rounded-full text-sm font-medium shadow-[0_0_20px_rgba(255,140,100,0.1)]">
-                <MapPin className="w-3.5 h-3.5 mr-2 inline" /> Orlando, FL - International Drive
+                <Zap className="w-3.5 h-3.5 mr-2 inline" /> Global Expo · June 5–7, 2026
               </Badge>
             </div>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter mb-6 leading-[1.1] text-white">
-              <AnimatedText text="Build something" className="inline-block" />
+              <AnimatedText text="Builders. Sponsors." className="inline-block" />
               <br />
-              <AnimatedText text="people remember." className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent text-glow" />
+              <AnimatedText text="One live expo." className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent text-glow" />
             </h1>
 
             <div className="w-full max-w-2xl mx-auto mb-8 animate-fade-in-up relative" style={{ animationDelay: '0.35s' }}>
@@ -524,12 +558,12 @@ function LandingContent() {
             </div>
 
             <p className="text-xl md:text-2xl text-white/70 mb-12 max-w-2xl mx-auto font-light leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-              The creative, community-driven builder experience where beginners, creators, and founders come together to learn vibe coding, submit projects, and earn recognition.
+              Meet the people building what's next. Discover tools, watch live demos, and connect with sponsors shaping the future — all inside one virtual expo. Broadcast globally, anchored in Orlando.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
               <Button size="lg" onClick={() => navigateToRoom("pricing")} className="h-14 px-8 text-lg bg-white text-black hover:bg-white/90 rounded-full w-full sm:w-auto shadow-[0_0_30px_rgba(255,255,255,0.1)] group">
-                Register Now <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                Get Your Pass <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button size="lg" variant="outline" onClick={() => navigateToRoom("schedule")} className="h-14 px-8 text-lg border-white/10 hover:bg-white/5 rounded-full w-full sm:w-auto backdrop-blur-sm text-white">
                 View Schedule
@@ -542,9 +576,9 @@ function LandingContent() {
                   <div className="text-left">
                     <p className="text-xs text-primary font-mono uppercase tracking-widest mb-1.5 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                      Next Event
+                      Expo Opens In
                     </p>
-                    <p className="font-bold text-xl text-card-foreground">The MasterClass & Expo</p>
+                    <p className="font-bold text-xl text-card-foreground">VibeCODE 101 Virtual Expo</p>
                   </div>
                   <div className="h-12 w-px bg-border hidden md:block"></div>
                   <div className="flex gap-4 md:gap-6">

@@ -4,6 +4,7 @@ import { Sparkles, Send, X, Globe, Building2, User, Zap, Brain, Search, PenLine 
 import { cn } from "@/lib/utils";
 import { useSpatial } from "@/components/spatial/SpatialProvider";
 import { useChatContext, type LoadingStatus } from "@/components/ChatProvider";
+import { ProjectConfirmForm } from "@/components/ProjectConfirmForm";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -54,6 +55,8 @@ export function AIConcierge() {
   const { messages, isLoading, loadingStatus, isOpen, setIsOpen, sendMessage } = useChatContext();
   const [inputValue, setInputValue] = useState("");
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [dismissedForms, setDismissedForms] = useState<Set<number>>(new Set());
+  const [approvedForms, setApprovedForms] = useState<Set<number>>(new Set());
   const chatPanelRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { navigateToRoom, currentRoom, currentView } = useSpatial();
@@ -147,7 +150,7 @@ export function AIConcierge() {
                     </div>
                     <p className="text-sm font-semibold text-foreground mb-1">Hey! Welcome to Vibe Code Expo</p>
                     <p className="text-xs text-muted-foreground max-w-[280px] mb-5 leading-relaxed">
-                      I can help you find the right ticket, explore masterclasses, or show you how your company fits as a sponsor.
+                      I can help you find the right badge, explore masterclasses, or show you how your company fits as a sponsor.
                     </p>
                     <div className="w-full space-y-2">
                       <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-1">Tell me about yourself</p>
@@ -161,7 +164,7 @@ export function AIConcierge() {
                           </div>
                           <div>
                             <span className="font-medium text-foreground">I'm a solo developer</span>
-                            <span className="block text-[10px] text-muted-foreground">Find the right track & ticket for me</span>
+                            <span className="block text-[10px] text-muted-foreground">Find the right track & badge for me</span>
                           </div>
                         </button>
                         <button
@@ -239,6 +242,13 @@ export function AIConcierge() {
                           ))}
                         </span>
                       </div>
+                    )}
+                    {msg.role === "assistant" && msg.confirmForm && !dismissedForms.has(i) && (
+                      <ProjectConfirmForm
+                        initial={msg.confirmForm}
+                        onApproved={() => setApprovedForms(prev => new Set(prev).add(i))}
+                        onDismiss={() => setDismissedForms(prev => new Set(prev).add(i))}
+                      />
                     )}
                   </div>
                 ))}
