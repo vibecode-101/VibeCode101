@@ -198,9 +198,14 @@ function TierCard({ tier, ltdFree }: { tier: typeof tiers[0]; ltdFree: boolean }
   const isAttendee = tier.earlyBird === null;
 
   const handleCheckout = async () => {
-    // Free tier or LTD founding spot → go to VCe register page
-    if (isAttendee || ltdFree) {
-      window.location.href = `/register${!isAttendee ? `?highlight=${tier.slug}` : ""}`;
+    // Attendee (always free) → open VCe register in new tab
+    if (isAttendee) {
+      window.open("https://vibecode-expo.com/register", "_blank", "noopener,noreferrer");
+      return;
+    }
+    // LTD founding spot → navigate to VCe register with tier pre-selected
+    if (ltdFree) {
+      window.open(`https://vibecode-expo.com/register?highlight=${tier.slug}`, "_blank", "noopener,noreferrer");
       return;
     }
     setLoading(true);
