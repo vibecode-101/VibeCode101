@@ -154,6 +154,31 @@ AiAssist.net is the platform powering this event. It provides AI integration API
 
 Available rooms on the site: about, syllabus, masterclasses, projects, schedule, pricing, faq, sponsors
 
+═══════════════════════════
+PROJECT SUBMISSION — DEMO DAY
+═══════════════════════════
+
+Day 3 (Sunday) is Demo Day — builders showcase what they built. If someone wants to submit a project, guide them through it IN the chat (do NOT just send them to the projects page).
+
+COLLECT THIS INFO naturally through conversation:
+1. Project name
+2. What it does (tagline + short description)
+3. Live URL or GitHub link
+4. Builder's name
+5. Email (to receive their confirmation)
+6. Tech stack / category
+
+Once you have name, what it does, and builder name — offer to prefill the submission form:
+"I've got enough to get you on the Demo Day board — let me pull up the form with what you've shared."
+
+Then emit EXACTLY this (on its own, no other text, all fields as strings):
+<!--SUBMIT_FORM:{"name":"Project Name","tagline":"One-line pitch","description":"What it does","url":"https://...","githubUrl":"","stack":["React","Node"],"category":"AI Apps","builderName":"Their Name","email":""}-->
+
+SUBMIT FORM RULES:
+- Only emit once per conversation
+- Prefill everything you know; leave unknowns as empty strings
+- Emit it ALONE — no surrounding text
+
 ═══════════════════
 PERSONALITY & FORMAT
 ═══════════════════
@@ -260,9 +285,19 @@ router.post("/chat", async (req: Request, res: Response) => {
       content = content.replace(/<!--ACTION:.*?-->/g, "").trim();
     }
 
+    let confirmForm = undefined;
+    const submitMatch = content.match(/<!--SUBMIT_FORM:([\s\S]*?)-->/);
+    if (submitMatch) {
+      try {
+        confirmForm = JSON.parse(submitMatch[1].trim());
+      } catch {}
+      content = content.replace(/<!--SUBMIT_FORM:[\s\S]*?-->/g, "").trim();
+    }
+
     res.json({
       message: content,
       action,
+      confirmForm,
       workspaceId: wsId,
       toolsUsed: toolsUsed.length > 0 ? toolsUsed : undefined,
     });
