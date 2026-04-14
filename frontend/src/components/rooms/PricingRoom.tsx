@@ -1,8 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Badge as BadgeIcon, CheckCircle2, Users, Clock, Loader2, Radio, Building2, Tag, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { Badge as BadgeIcon, CheckCircle2, Users, Clock, Loader2, Radio, Building2, Tag, Sparkles, Gift } from "lucide-react";
+import { useState, useEffect } from "react";
+
+interface LtdStatus { claimed: number; total: number; remaining: number; isFree: boolean; }
 
 const isEarlyBird = import.meta.env.VITE_PRICING_PHASE !== "regular";
 
@@ -151,12 +153,23 @@ const pricingFaqs = [
   },
 ];
 
-function PriceDisplay({ earlyBird, regular }: { earlyBird: number | null; regular: number | null }) {
+function PriceDisplay({ earlyBird, regular, ltdFree }: { earlyBird: number | null; regular: number | null; ltdFree?: boolean }) {
   if (earlyBird === null) {
     return (
       <div className="mb-8">
         <span className="text-6xl font-bold text-emerald-400">Free</span>
         <span className="text-muted-foreground dark:text-white/60 text-sm font-mono uppercase tracking-widest ml-3">Always</span>
+      </div>
+    );
+  }
+  if (ltdFree) {
+    return (
+      <div className="mb-8">
+        <div className="flex items-baseline gap-3 mb-1">
+          <span className="text-6xl font-bold text-emerald-400">FREE</span>
+          <span className="text-2xl text-muted-foreground dark:text-white/40 line-through">${isEarlyBird ? earlyBird : regular}</span>
+        </div>
+        <span className="text-emerald-400/80 text-sm font-mono uppercase tracking-widest">Founding Spot</span>
       </div>
     );
   }
@@ -179,16 +192,15 @@ function PriceDisplay({ earlyBird, regular }: { earlyBird: number | null; regula
   );
 }
 
-const VCE_REGISTER_URL = "https://vibecode-101.com/register";
-
-function TierCard({ tier }: { tier: typeof tiers[0] }) {
+function TierCard({ tier, ltdFree }: { tier: typeof tiers[0]; ltdFree: boolean }) {
   const checkColor = tier.accent === "secondary" ? "text-secondary" : "text-primary";
   const [loading, setLoading] = useState(false);
-  const isFree = tier.earlyBird === null;
+  const isAttendee = tier.earlyBird === null;
 
   const handleCheckout = async () => {
-    if (isFree) {
-      window.open(VCE_REGISTER_URL, "_blank", "noopener,noreferrer");
+    // Free tier or LTD founding spot → go to VCe register page
+    if (isAttendee || ltdFree) {
+      window.location.href = `/register${!isAttendee ? `?highlight=${tier.slug}` : ""}`;
       return;
     }
     setLoading(true);
@@ -212,6 +224,8 @@ function TierCard({ tier }: { tier: typeof tiers[0] }) {
     }
   };
 
+  const ctaLabel = isAttendee ? tier.cta : ltdFree ? `Claim Free ${tier.name} Spot` : tier.cta;
+
   if (tier.featured) {
     return (
       <div className="relative flex flex-col">
@@ -224,7 +238,7 @@ function TierCard({ tier }: { tier: typeof tiers[0] }) {
             <div className="relative z-[2] flex-1 flex flex-col">
               <h3 className="text-3xl font-bold mb-3 text-foreground dark:text-white">{tier.name}</h3>
               <p className="text-muted-foreground dark:text-white/70 text-base font-light mb-6">{tier.description}</p>
-              <PriceDisplay earlyBird={tier.earlyBird} regular={tier.regular} />
+              <PriceDisplay earlyBird={tier.earlyBird} regular={tier.regular} ltdFree={ltdFree && !isAttendee} />
               <ul className="flex flex-col gap-5 mb-10 flex-1">
                 {tier.perks.map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-base text-foreground dark:text-white/90">
@@ -240,7 +254,7 @@ function TierCard({ tier }: { tier: typeof tiers[0] }) {
                 disabled={loading}
                 className="w-full h-14 rounded-full bg-primary text-white hover:bg-primary/90 shadow-[0_0_20px_rgba(235,90,30,0.3)] text-base font-semibold disabled:opacity-50"
               >
-                {loading ? <><Loader2 className="w-5 h-5 animate-spin mr-2" /> Processing...</> : tier.cta}
+                {loading ? <><Loader2 className="w-5 h-5 animate-spin mr-2" /> Processing...</> : ctaLabel}
               </Button>
             </div>
           </div>
@@ -262,7 +276,7 @@ function TierCard({ tier }: { tier: typeof tiers[0] }) {
           </div>
         )}
         <p className="text-muted-foreground dark:text-white/70 text-base font-light mb-6">{tier.description}</p>
-        <PriceDisplay earlyBird={tier.earlyBird} regular={tier.regular} />
+        <PriceDisplay earlyBird={tier.earlyBird} regular={tier.regular} ltdFree={ltdFree && !isAttendee} />
         <ul className="flex flex-col gap-5 mb-10 flex-1">
           {tier.perks.map((item, i) => (
             <li key={i} className="flex items-center gap-3 text-base text-foreground dark:text-white/90">
@@ -279,7 +293,7 @@ function TierCard({ tier }: { tier: typeof tiers[0] }) {
           disabled={loading}
           className="w-full h-14 rounded-full border-border dark:border-white/30 text-foreground dark:text-white hover:bg-muted dark:hover:bg-white/10 holo-border relative text-base disabled:opacity-50"
         >
-          <span className="relative z-[2]">{loading ? <><Loader2 className="w-5 h-5 animate-spin mr-2 inline" /> Processing...</> : tier.cta}</span>
+          <span className="relative z-[2]">{loading ? <><Loader2 className="w-5 h-5 animate-spin mr-2 inline" /> Processing...</> : ctaLabel}</span>
         </Button>
       </div>
     </div>
@@ -287,6 +301,15 @@ function TierCard({ tier }: { tier: typeof tiers[0] }) {
 }
 
 export default function PricingRoom() {
+  const [ltdStatus, setLtdStatus] = useState<LtdStatus | null>(null);
+
+  useEffect(() => {
+    fetch("https://vibecode-expo.com/api/checkout/ltd-status")
+      .then(r => r.json()).then(setLtdStatus).catch(() => {});
+  }, []);
+
+  const ltdFree = ltdStatus?.isFree ?? false;
+
   return (
     <div className="py-16 md:py-24">
       <div className="container mx-auto px-6">
@@ -298,7 +321,12 @@ export default function PricingRoom() {
           <p className="text-2xl text-muted-foreground font-light">
             Buy once. Attend every future VibeCODE event. Pick the tier that fits your role.
           </p>
-          {isEarlyBird && (
+          {ltdFree ? (
+            <div className="mt-6 inline-flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-6 py-3 rounded-full text-base font-semibold">
+              <Gift className="w-5 h-5" />
+              All {ltdStatus?.total} founding spots are FREE — {ltdStatus?.remaining} remaining · no card needed
+            </div>
+          ) : isEarlyBird && (
             <div className="mt-6 inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-600 dark:text-green-400 px-5 py-2.5 rounded-full text-base font-medium">
               <Clock className="w-4 h-4" />
               Early Bird Pricing — Limited Time
@@ -361,7 +389,7 @@ export default function PricingRoom() {
 
         <div className="grid sm:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12 pt-5">
           {tiers.map((tier) => (
-            <TierCard key={tier.slug} tier={tier} />
+            <TierCard key={tier.slug} tier={tier} ltdFree={ltdFree} />
           ))}
         </div>
 
