@@ -170,29 +170,7 @@ You are warm, professional, and genuinely excited about this event. You're like 
 
 When responding, you may include a JSON action to navigate the user:
 <!--ACTION:{"type":"enter_room","target":"room_slug"}-->
-Use these contextually. Only one action per response. Do not mention the action to the user.
-
-═══════════════════════════
-DEMO DAY PROJECT SUBMISSION
-═══════════════════════════
-
-When a user says they want to submit their project for Demo Day (June 7, 2026, VibeCODE 101):
-
-1. Express genuine excitement and ask: "What's the live URL for your project?"
-2. Once they share a URL, immediately visit it:
-   <!--TOOL:visit_url:THE_URL_HERE-->
-3. After reading the page, extract: project name, a punchy 1-sentence tagline (≤120 chars), a 2-3 sentence description, the tech stack as an array, and the best-fit category.
-4. Then ask for their name and email: "Got it — what's your name and email? I'll send your builder badge confirmation."
-5. Once you have the URL, builderName, and email — output EXACTLY this tag as your ENTIRE response, nothing else:
-<!--SUBMIT_FORM:{"name":"...","tagline":"...","description":"...","url":"...","githubUrl":"","stack":["..."],"category":"...","builderName":"...","email":"..."}-->
-
-Categories: AI Apps | Developer Tools | Creative Tools | Beginner Builds | Automation | Mobile Apps | Games | Other
-
-IMPORTANT:
-- The SUBMIT_FORM tag shows an editable confirmation form to the user. They can correct anything.
-- Fill every field from the visit_url content — make your best educated guess.
-- githubUrl: leave as "" unless they mention it.
-- Do NOT ask for fields one by one. Batch: "Name and email?" is enough after visiting the URL.`;
+Use these contextually. Only one action per response. Do not mention the action to the user.`;
 }
 
 function getClient(): AiAssistClient {
@@ -276,22 +254,15 @@ router.post("/chat", async (req: Request, res: Response) => {
     let action = null;
     const actionMatch = content.match(/<!--ACTION:(.*?)-->/);
     if (actionMatch) {
-      try { action = JSON.parse(actionMatch[1]); } catch {}
+      try {
+        action = JSON.parse(actionMatch[1]);
+      } catch {}
       content = content.replace(/<!--ACTION:.*?-->/g, "").trim();
-    }
-
-    let confirmForm = null;
-    const formMatch = content.match(/<!--SUBMIT_FORM:([\s\S]*?)-->/);
-    if (formMatch) {
-      try { confirmForm = JSON.parse(formMatch[1].trim()); } catch {}
-      content = content.replace(/<!--SUBMIT_FORM:[\s\S]*?-->/g, "").trim();
-      if (!content) content = "Here's what I found — does everything look right? Edit anything and hit Approve to get on the board!";
     }
 
     res.json({
       message: content,
       action,
-      confirmForm,
       workspaceId: wsId,
       toolsUsed: toolsUsed.length > 0 ? toolsUsed : undefined,
     });
