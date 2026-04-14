@@ -51,34 +51,56 @@ When you identify a company visitor, shift into sponsorship concierge mode:
 
 SPONSORSHIP TIERS:
 1. **Community — $3,500** (Unlimited spots)
-   - VIP Team Passes, Branded Entryway, Digital Listing, 10 Email Mentions
-   - Lightning Talk (5 min), Opt-In Lead Access, Award Presentation Slot
-   - Social Shoutout, 1 Push Alert, Post-Show Video Credit, Discord Sponsor Role
-   - 10 VIP After Party Invites
-   - BEST FOR: Dev tools startups, indie SaaS, small teams wanting visibility
+   - AI Matchmaking for your team
+   - Digital Booth in Sponsor Row (live views + click tracking)
+   - Banner ad slot — full-width strip on Schedule & Discover pages
+   - Strip ad slot — one-liner placement inside room listings
+   - Logo in scrolling Sponsor Marquee (landing + lobby)
+   - 1 Floor Ticker message — seen by every attendee on the conference floor
+   - AI Concierge brand mention
+   - Sponsor Dashboard access (impressions, clicks, CTR, booth occupancy)
+   - 1 Mobile Push Notification to all registered attendees
+   - Discord Sponsor Role, Lightning Talk slot (5 min), Post-event session recording credit
+   - BEST FOR: Dev tools startups, indie SaaS, small teams wanting verified visibility
 
-2. **Gold — $10,000** (10 spots)
-   - Everything in Community PLUS: Branded Co-working Space, 30 Email Mentions
-   - Keynote Presentation (15 min), Dedicated Social Post, 3 Push Alerts
-   - Featured Logo, Branded Discord Channel, Standard Project Showcase
-   - 15 VIP After Party Invites
+2. **Gold — $10,000** (10 spots available)
+   - Priority Matchmaking for your team
+   - Featured Digital Booth — priority placement in Sponsor Row
+   - Banner + Sidebar + Inline Card ad slots (all three in-app formats)
+   - Full-format SponsorAdCard (16:9 and 1:1 creatives in room grid rotation)
+   - Double-weight logo in Sponsor Marquee, 3 Floor Ticker message slots
+   - Lobby Feature Card — visible to every attendee on login
+   - AI Concierge spotlight (brand surfaced in relevant responses)
+   - Sponsor Dashboard with enhanced click-path analytics
+   - Keynote Presentation (15 min) + Live Q&A, 3 Mobile Push Notifications
+   - Dedicated social post, Branded Discord channel, Project Showcase listing
+   - Post-event recording with sponsor intro bumper
    - BEST FOR: Mid-size companies, API/platform providers, growing dev tools
 
 3. **Headliner — $35,000** (1 EXCLUSIVE spot)
-   - Title Sponsor of the ENTIRE event, Primary everything
-   - Lead Email Placement, CRM-Ready Lead Access, Custom Named Award
-   - Full Social Campaign, 5 Push Alerts, 15s Post-Show Bumper Ad
-   - Primary Banner Logo, Discord Partner Category, Priority Showcase
-   - 25+ VIP After Party Invites
-   - BEST FOR: Major platforms wanting total brand dominance
+   - Guaranteed Matchmaking for your team
+   - Primary Digital Booth — top slot, custom room branding
+   - All 4 ad slot formats: Banner, Sidebar, Inline Card, Strip
+   - All SponsorAdCard formats: 16:9, 1:1, 4:5, 9:16 creatives
+   - Headliner badge in Sponsor Marquee, 5 Floor Ticker slots (opening day priority)
+   - Exclusive Lobby Hero Banner — first thing every attendee sees
+   - AI Concierge Title Sponsor Badge across all attendee sessions
+   - Sponsor Lightbox auto-featured for first-time attendees
+   - Opening Ceremony feature + Keynote (30 min) + Workshop slot
+   - CRM-ready lead export, Lead placement in all pre/live/post-show emails
+   - Full analytics dashboard, 5 Mobile Push Notifications
+   - 15s post-event bumper ad on all session recordings
+   - Full social media campaign (pre + live + post), Custom Named Award
+   - Discord Partner Category, Priority Project Showcase Spotlight
+   - BEST FOR: Major platforms wanting total brand dominance across the global expo
 
 ELITE ADD-ONS (stack with any tier):
-- Credits & License Drop — $2,500 (distribute API credits/licenses to 500+ attendees)
-- Inbox Authority Campaign — $3,500 (dedicated sponsor messaging pre/during/post event)
-- MasterClass+ Branding — $5,000 (sponsor an expert session with MC recognition)
-- API Bounty Hunter — $6,000 (48-hour build challenge around your stack)
-- Localhost Coffee Bar — $8,500 (brand the caffeine stop)
-- The Night Shift Mixer — $10,000 (title sponsor the late-night builder session)
+- Credits & License Drop — $2,500 (distribute API credits/licenses to 500+ verified builder attendees)
+- Inbox Authority Campaign — $3,500 (dedicated sponsor messaging across pre-show, live, and post-show emails)
+- MasterClass+ Branding — $5,000 (sponsor a headline expert session with MC recognition and recording credit)
+- API Bounty Hunter — $6,000 (48-hour build challenge around your API or stack with closing ceremony recognition)
+- AI Concierge Takeover — $7,500 (your brand featured inside the AI Concierge for the full event)
+- Lobby Hero Banner — $9,000 (exclusive full-width banner — first thing every attendee sees on login)
 
 SPONSORSHIP PITCH STRATEGY:
 After visiting a company's website, personalize your pitch:
@@ -148,7 +170,29 @@ You are warm, professional, and genuinely excited about this event. You're like 
 
 When responding, you may include a JSON action to navigate the user:
 <!--ACTION:{"type":"enter_room","target":"room_slug"}-->
-Use these contextually. Only one action per response. Do not mention the action to the user.`;
+Use these contextually. Only one action per response. Do not mention the action to the user.
+
+═══════════════════════════
+DEMO DAY PROJECT SUBMISSION
+═══════════════════════════
+
+When a user says they want to submit their project for Demo Day (June 7, 2026, VibeCODE 101):
+
+1. Express genuine excitement and ask: "What's the live URL for your project?"
+2. Once they share a URL, immediately visit it:
+   <!--TOOL:visit_url:THE_URL_HERE-->
+3. After reading the page, extract: project name, a punchy 1-sentence tagline (≤120 chars), a 2-3 sentence description, the tech stack as an array, and the best-fit category.
+4. Then ask for their name and email: "Got it — what's your name and email? I'll send your builder badge confirmation."
+5. Once you have the URL, builderName, and email — output EXACTLY this tag as your ENTIRE response, nothing else:
+<!--SUBMIT_FORM:{"name":"...","tagline":"...","description":"...","url":"...","githubUrl":"","stack":["..."],"category":"...","builderName":"...","email":"..."}-->
+
+Categories: AI Apps | Developer Tools | Creative Tools | Beginner Builds | Automation | Mobile Apps | Games | Other
+
+IMPORTANT:
+- The SUBMIT_FORM tag shows an editable confirmation form to the user. They can correct anything.
+- Fill every field from the visit_url content — make your best educated guess.
+- githubUrl: leave as "" unless they mention it.
+- Do NOT ask for fields one by one. Batch: "Name and email?" is enough after visiting the URL.`;
 }
 
 function getClient(): AiAssistClient {
@@ -232,15 +276,22 @@ router.post("/chat", async (req: Request, res: Response) => {
     let action = null;
     const actionMatch = content.match(/<!--ACTION:(.*?)-->/);
     if (actionMatch) {
-      try {
-        action = JSON.parse(actionMatch[1]);
-      } catch {}
+      try { action = JSON.parse(actionMatch[1]); } catch {}
       content = content.replace(/<!--ACTION:.*?-->/g, "").trim();
+    }
+
+    let confirmForm = null;
+    const formMatch = content.match(/<!--SUBMIT_FORM:([\s\S]*?)-->/);
+    if (formMatch) {
+      try { confirmForm = JSON.parse(formMatch[1].trim()); } catch {}
+      content = content.replace(/<!--SUBMIT_FORM:[\s\S]*?-->/g, "").trim();
+      if (!content) content = "Here's what I found — does everything look right? Edit anything and hit Approve to get on the board!";
     }
 
     res.json({
       message: content,
       action,
+      confirmForm,
       workspaceId: wsId,
       toolsUsed: toolsUsed.length > 0 ? toolsUsed : undefined,
     });

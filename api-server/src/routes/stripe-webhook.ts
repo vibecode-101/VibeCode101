@@ -2,35 +2,85 @@ import { Router, type Request, type Response } from "express";
 import Stripe from "stripe";
 import { createTransport } from "nodemailer";
 
+async function provisionConferenceUser(
+  email: string,
+  name: string,
+  tier: string,
+  confirmationId: string
+): Promise<string | null> {
+  try {
+    const secret = process.env.SESSION_SECRET;
+    if (!secret) return null;
+    const resp = await fetch("http://localhost:8080/api/internal/provision-user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-internal-secret": secret,
+      },
+      body: JSON.stringify({ email, name, tier, confirmationId }),
+    });
+    if (!resp.ok) {
+      console.error("provision-user failed:", resp.status, await resp.text());
+      return null;
+    }
+    const data = await resp.json() as { loginUrl?: string };
+    return data.loginUrl ?? null;
+  } catch (err) {
+    console.error("provision-user error:", err);
+    return null;
+  }
+}
+
 const router = Router();
 
-const TIER_DETAILS: Record<string, { name: string; emoji: string; perks: string[] }> = {
-  general: {
-    name: "General",
-    emoji: "🎟️",
-    perks: ["Masterclass Access", "WiFi & Workspace", "Event Swag", "Community Voting", "Discord Access"],
+const TIER_DETAILS: Record<string, { name: string; icon: string; perks: string[] }> = {
+  vip: {
+    name: "VIP",
+    icon: "V",
+    perks: [
+      "AiAssist.net Pro Membership — Lifetime ($19/mo value)",
+      "Browse With Me — AI browser study companion for Chrome. Understand, analyze & interact with any webpage in real time. Privacy-first, BYOK (11+ LLM providers). Lifetime Access.",
+      "SaaS Signal — Lead intelligence & social network radar. Scan, track, and surface high-intent prospects in real time. Lifetime Access.",
+      "June 5–7 Inaugural Broadcast — All Sessions",
+      "VibeCODE Expo Platform Account",
+      "AI Matchmaking",
+      "Discord Community (330+ Members)",
+      "9-Module Beginner Track Pathway",
+      "Demo Day Access + Community Voting",
+      "Session Recordings (Post-Event)",
+    ],
   },
   builder_pro: {
     name: "Builder Pro",
-    emoji: "🚀",
+    icon: "B",
     perks: [
-      "Everything in General & Beginner",
-      "Sponsor Perks (licenses, credits)",
-      "1-on-1 Mentor Sessions",
-      "Live & Post-Event Livestreams",
-      "Priority Seating",
-      "Pro Showcase & Web Feature",
+      "Everything in VIP",
+      "Full VibeCODE Expo Platform — All Rooms & Networking",
+      "BYOK AI Concierge",
+      "Priority Q&A in All Masterclasses",
+      "Pro Showcase Listing",
+      "Sponsor Perks — Licenses, Credits & API Tokens",
     ],
   },
-  beginner: {
-    name: "Beginner Track",
-    emoji: "🌱",
+  mentor: {
+    name: "Mentor",
+    icon: "M",
     perks: [
-      "Everything in General",
-      "9-Module Guided Pathway",
-      "Project Reviews from Mentors",
-      "Beginner Swag Pack",
-      "Beginner Showcase Slot",
+      "Everything in VIP",
+      "Host Study Groups & Office Hours on VibeCODE Expo",
+      "Guide Beginner Track Cohort Builders",
+      "Mentor Badge on VibeCODE Expo Profile",
+    ],
+  },
+  sponsor: {
+    name: "Sponsor",
+    icon: "S",
+    perks: [
+      "Everything in Builder Pro",
+      "Virtual Exhibitor Booth on VibeCODE Expo",
+      "Logo Placement — VibeCODE 101 + VibeCODE Expo Sponsor Section",
+      "Sponsored Session Slot Opportunity",
+      "Exhibitor Badge + Attendee Lead Access",
     ],
   },
 };
@@ -60,10 +110,11 @@ function buildConfirmationEmail(
   tier: string,
   quantity: number,
   amountPaid: string,
-  confirmationId: string
+  confirmationId: string,
+  loginUrl?: string | null
 ): { subject: string; text: string; html: string } {
-  const tierInfo = TIER_DETAILS[tier] || TIER_DETAILS.general;
-  const subject = `${tierInfo.emoji} You're in! Vibe Code Expo — ${tierInfo.name} Ticket Confirmed`;
+  const tierInfo = TIER_DETAILS[tier] || TIER_DETAILS.vip;
+  const subject = `You're in! VibeCODE Expo — ${tierInfo.name} Ticket Confirmed`;
 
   const perksText = tierInfo.perks.map((p) => `  ✓ ${p}`).join("\n");
   const text = `Hey ${customerName}!
@@ -88,10 +139,16 @@ WHAT TO BRING:
 A laptop is welcome but not required. If you're presenting, event hardware is available.
 
 WHAT'S NEXT:
-1. Join the Discord community (link coming soon)
-2. Mark your calendar for June 5-7, 2026
-3. Keep an eye on your inbox for venue details and schedule updates
+1. Access your VibeCODE Expo account (one-click login below)
+2. Join the Discord community (link coming soon)
+3. Mark your calendar for June 5-7, 2026
+4. Keep an eye on your inbox for venue details and schedule updates
+${loginUrl ? `
+🔐 ONE-CLICK CONFERENCE LOGIN:
+${loginUrl}
 
+(Valid for 30 days — click to set up your conference profile)
+` : ""}
 Questions? Reply to this email or reach us at founders@vibecode-101.com
 
 See you in Orlando! 🌴
@@ -115,7 +172,7 @@ See you in Orlando! 🌴
     <!-- Header with gradient -->
     <div style="background: linear-gradient(135deg, #F05537 0%, #f97316 50%, #F05537 100%); border-radius: 16px 16px 0 0; padding: 40px 32px; text-align: center;">
       <div style="margin-bottom: 16px;">
-        <span style="font-size: 48px;">${tierInfo.emoji}</span>
+        <span style="display: inline-block; width: 64px; height: 64px; line-height: 64px; border-radius: 50%; background: rgba(255,255,255,0.2); color: white; font-size: 28px; font-weight: 900; text-align: center;">${tierInfo.icon}</span>
       </div>
       <h1 style="margin: 0 0 8px 0; color: white; font-size: 28px; font-weight: 800; letter-spacing: -0.5px;">You're In!</h1>
       <p style="margin: 0; color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 300;">Welcome to Vibe Code Expo, ${customerName}</p>
@@ -181,10 +238,10 @@ See you in Orlando! 🌴
         </table>
       </div>
 
-      <!-- 3-Day Schedule Preview -->
+      <!-- Schedule Preview -->
       <div style="padding: 32px; border-bottom: 1px dashed rgba(255,255,255,0.1);">
         <h2 style="margin: 0 0 20px 0; color: white; font-size: 18px; font-weight: 700;">
-          <span style="color: #F05537;">🗓️</span> 3-Day Schedule Preview
+          June 5–7 Inaugural Schedule + Monthly Events Ongoing
         </h2>
         <table style="width: 100%; border-collapse: collapse;">
           <tr>
@@ -217,23 +274,47 @@ See you in Orlando! 🌴
           <tr>
             <td style="padding: 8px 0; color: #e0e0e0; font-size: 14px;">
               <span style="display: inline-block; background: rgba(240,85,55,0.15); color: #F05537; width: 24px; height: 24px; line-height: 24px; text-align: center; border-radius: 50%; font-weight: 700; font-size: 12px; margin-right: 10px;">1</span>
-              Join the Discord community (link coming soon!)
+              Set up your conference account (button below)
             </td>
           </tr>
           <tr>
             <td style="padding: 8px 0; color: #e0e0e0; font-size: 14px;">
               <span style="display: inline-block; background: rgba(240,85,55,0.15); color: #F05537; width: 24px; height: 24px; line-height: 24px; text-align: center; border-radius: 50%; font-weight: 700; font-size: 12px; margin-right: 10px;">2</span>
-              Mark your calendar — June 5–7, 2026
+              Join the Discord community (link coming soon!)
             </td>
           </tr>
           <tr>
             <td style="padding: 8px 0; color: #e0e0e0; font-size: 14px;">
               <span style="display: inline-block; background: rgba(240,85,55,0.15); color: #F05537; width: 24px; height: 24px; line-height: 24px; text-align: center; border-radius: 50%; font-weight: 700; font-size: 12px; margin-right: 10px;">3</span>
+              Mark your calendar — June 5–7, 2026
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #e0e0e0; font-size: 14px;">
+              <span style="display: inline-block; background: rgba(240,85,55,0.15); color: #F05537; width: 24px; height: 24px; line-height: 24px; text-align: center; border-radius: 50%; font-weight: 700; font-size: 12px; margin-right: 10px;">4</span>
               Watch your inbox for venue details & schedule updates
             </td>
           </tr>
         </table>
       </div>
+
+      ${loginUrl ? `
+      <!-- Conference Account CTA -->
+      <div style="padding: 0 32px 32px;">
+        <div style="background: linear-gradient(135deg, #1a0a3a, #0f1a3a); border: 1px solid rgba(124,58,237,0.4); border-radius: 16px; padding: 28px; text-align: center;">
+          <div style="font-size: 32px; margin-bottom: 12px;">🔐</div>
+          <h3 style="margin: 0 0 8px 0; color: white; font-size: 18px; font-weight: 800;">Your VibeCODE Expo Account is Ready</h3>
+          <p style="margin: 0 0 20px 0; color: #aaa; font-size: 13px; line-height: 1.6;">
+            We've created your conference platform account. Click below to sign in,<br/>
+            set up your profile, and explore the virtual expo floor before June 5.
+          </p>
+          <a href="${loginUrl}" style="display: inline-block; background: linear-gradient(135deg, #7c3aed, #4f46e5); color: white; text-decoration: none; padding: 14px 32px; border-radius: 12px; font-weight: 800; font-size: 15px; letter-spacing: 0.3px;">
+            Access Your Conference Account →
+          </a>
+          <p style="margin: 16px 0 0 0; color: #666; font-size: 11px;">One-click login · Valid 30 days · No password required</p>
+        </div>
+      </div>
+      ` : ""}
     </div>
 
     <!-- Footer -->
@@ -286,7 +367,7 @@ router.post("/", async (req: Request, res: Response) => {
     const session = event.data.object as Stripe.Checkout.Session;
     const customerEmail = session.customer_details?.email;
     const customerName = session.customer_details?.name || "Attendee";
-    const tier = session.metadata?.tier || "general";
+    const tier = session.metadata?.tier || "vip";
     const quantity = parseInt(session.metadata?.quantity || "1");
     const amountPaid = `$${((session.amount_total || 0) / 100).toFixed(2)}`;
     const confirmationId = `VC-${session.id.slice(-8).toUpperCase()}`;
@@ -295,8 +376,15 @@ router.post("/", async (req: Request, res: Response) => {
 
     if (customerEmail) {
       try {
+        const loginUrl = await provisionConferenceUser(customerEmail, customerName, tier, confirmationId);
+        if (loginUrl) {
+          console.log(`Conference account provisioned for ${customerEmail} — isNew determined by provision endpoint`);
+        } else {
+          console.warn(`Conference account provision failed for ${customerEmail} — email will still send`);
+        }
+
         const transporter = getTransporter();
-        const email = buildConfirmationEmail(customerName, customerEmail, tier, quantity, amountPaid, confirmationId);
+        const email = buildConfirmationEmail(customerName, customerEmail, tier, quantity, amountPaid, confirmationId, loginUrl);
 
         await transporter.sendMail({
           from: `"Vibe Code Expo" <founders@vibecode-101.com>`,

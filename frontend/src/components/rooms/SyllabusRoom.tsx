@@ -32,9 +32,9 @@ const modules = [
   {
     step: "04",
     title: "The Backend",
-    desc: "Databases, APIs, and auth simplified. Setting up Supabase/Postgres, REST endpoints, and server functions.",
-    outcomes: ["Set up a database with Supabase", "Create REST API endpoints", "Implement authentication flows"],
-    tools: ["Supabase", "Drizzle ORM", "Express"],
+    desc: "APIs and data the right way. Redis for fast, namespaced key-value storage and FastAPI for clean, typed Python endpoints — no ORM overhead, just pure speed.",
+    outcomes: ["Design Redis key namespaces (e.g. app:user:*, app:session:*)", "Build typed REST endpoints with FastAPI", "Handle auth and sessions with Redis"],
+    tools: ["Redis", "FastAPI", "Python"],
     icon: Code2,
   },
   {
@@ -50,7 +50,7 @@ const modules = [
     title: "AI Agents for Founders",
     desc: "Building AI agents that help founders locate and enrich contacts for investors and journalists. Contact enrichment pipelines, data scraping ethics, CRM integration.",
     outcomes: ["Build contact enrichment pipelines", "Understand data scraping ethics", "Integrate with CRM tools"],
-    tools: ["AiAssist.net Agents", "Apollo/Hunter APIs", "Airtable"],
+    tools: ["AiAssist.net Agents", "OpenAI APIs", "Anthropic Agents"],
     icon: Bot,
   },
   {
@@ -72,9 +72,9 @@ const modules = [
   {
     step: "09",
     title: "The Pitch",
-    desc: "Presenting your project: demo day prep, storytelling for builders, recording demos, and building a portfolio.",
-    outcomes: ["Prepare a compelling demo", "Tell your builder story", "Create a project portfolio"],
-    tools: ["Loom", "Notion"],
+    desc: "Ship your story as fast as your code. Use AI agents to write your pitch script, generate a PDF one-pager, record your demo, and publish your portfolio — all in one session.",
+    outcomes: ["Use an AI agent to write and refine your pitch script", "Generate a PDF portfolio and one-pager with your agent", "Record and narrate your demo with Loom", "Structure your launch narrative in Notion"],
+    tools: ["Loom", "Notion", "PDF Generation", "AI Agents"],
     icon: Presentation,
   },
 ];
@@ -166,10 +166,10 @@ export default function SyllabusRoom() {
               <GraduationCap className="w-8 h-8 text-primary" />
               <div className="text-center sm:text-left">
                 <p className="font-bold text-foreground">Ready to start your journey?</p>
-                <p className="text-sm text-muted-foreground font-light">Get the Beginner Track ticket and follow the full pathway.</p>
+                <p className="text-sm text-muted-foreground font-light">All badges include the full 9-module pathway. Pick your tier.</p>
               </div>
               <Button onClick={() => navigateToRoom("pricing")} className="bg-primary hover:bg-primary/90 text-white rounded-full px-6 shrink-0">
-                Get Beginner Track <ArrowRight className="ml-2 w-4 h-4" />
+                Get Your Badge <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </div>
           </div>

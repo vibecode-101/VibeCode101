@@ -4,23 +4,29 @@ import Stripe from "stripe";
 const router = Router();
 
 const TIERS: Record<string, { name: string; description: string; earlyBird: number; regular: number }> = {
-  general: {
-    name: "Vibe Code 101 — General",
-    description: "Masterclass Access, WiFi & Workspace, Event Swag, Community Voting, Discord Access",
+  vip: {
+    name: "VibeCODE — VIP (Lifetime)",
+    description: "Includes lifetime AiAssist.net Pro membership ($19/mo value), lifetime Browse With Me (AI browser study companion, BYOK, 11+ LLM providers), lifetime SaaS Signal (lead intelligence & social network radar), June 5–7 inaugural broadcast + every future VibeCODE event, VibeCODE Expo platform account, AI matchmaking, Discord community, 9-module pathway, Demo Day, and session recordings — locked in for life.",
     earlyBird: 4900,
     regular: 7900,
   },
   builder_pro: {
-    name: "Vibe Code 101 — Builder Pro",
-    description: "Everything in General & Beginner + Sponsor Perks, 1-on-1 Mentor Sessions, Livestreams, Priority Seating, Pro Showcase",
+    name: "VibeCODE — Builder Pro (Lifetime)",
+    description: "Everything in VIP plus full VibeCODE Expo platform access, BYOK AI Concierge, priority Q&A, Pro Showcase listing, and sponsor perks — locked in for every future VibeCODE event.",
     earlyBird: 14900,
     regular: 24900,
   },
-  beginner: {
-    name: "Vibe Code 101 — Beginner Track",
-    description: "Everything in General + 9-Module Guided Pathway, Project Reviews, Beginner Swag Pack, Showcase Slot",
-    earlyBird: 8900,
-    regular: 12900,
+  mentor: {
+    name: "VibeCODE — Mentor (Lifetime)",
+    description: "Everything in VIP plus the ability to host study groups, run office hours, guide Beginner Track builders, and carry a Mentor badge on VibeCODE Expo — for every future VibeCODE event.",
+    earlyBird: 9900,
+    regular: 14900,
+  },
+  sponsor: {
+    name: "VibeCODE — Sponsor / Exhibitor (Lifetime)",
+    description: "Everything in Builder Pro plus a virtual exhibitor booth, logo placement on VibeCODE 101 and VibeCODE Expo, a sponsored session slot opportunity, and attendee lead access — for every future VibeCODE event.",
+    earlyBird: 29900,
+    regular: 49900,
   },
 };
 

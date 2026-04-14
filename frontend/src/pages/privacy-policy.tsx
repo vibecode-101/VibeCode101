@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
             <p className="text-muted-foreground font-light leading-relaxed mb-3">We collect information you provide directly when you:</p>
             <ul className="text-muted-foreground font-light leading-relaxed space-y-2">
               <li>Register for the event (name, email, company, role)</li>
-              <li>Purchase tickets (billing address, payment method via Stripe)</li>
+              <li>Purchase badges (billing address, payment method via Stripe)</li>
               <li>Submit projects to the gallery (project name, description, screenshots)</li>
               <li>Subscribe to our newsletter (email address)</li>
               <li>Interact with the AI Concierge on this website (chat messages)</li>
@@ -46,7 +46,7 @@ export default function PrivacyPolicy() {
 
             <h2 className="text-2xl font-bold text-foreground mt-12 mb-4">How We Use Your Information</h2>
             <ul className="text-muted-foreground font-light leading-relaxed space-y-2">
-              <li>Process ticket purchases and send confirmation emails</li>
+              <li>Process badge purchases and send confirmation emails</li>
               <li>Communicate event updates, schedule changes, and logistics</li>
               <li>Display submitted projects in the public gallery</li>
               <li>Improve the event experience and plan future events</li>

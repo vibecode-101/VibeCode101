@@ -31,20 +31,20 @@ export default function TermsOfService() {
 
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <p className="text-xl text-muted-foreground font-light leading-relaxed mb-8">
-              By purchasing a ticket or attending Vibe Code 101, you agree to the following terms and conditions.
+              By purchasing a badge or attending Vibe Code 101, you agree to the following terms and conditions.
             </p>
 
             <h2 className="text-2xl font-bold text-foreground mt-12 mb-4">Event Participation</h2>
             <p className="text-muted-foreground font-light leading-relaxed">
-              Vibe Code 101 is organized by AiAssist.net. Attendance requires a valid ticket purchased through our official website. We reserve the right to refuse admission or remove any attendee who violates our Code of Conduct.
+              Vibe Code 101 is organized by AiAssist.net. Attendance requires a valid badge purchased through our official website. We reserve the right to refuse admission or remove any attendee who violates our Code of Conduct.
             </p>
 
-            <h2 className="text-2xl font-bold text-foreground mt-12 mb-4">Tickets & Refunds</h2>
+            <h2 className="text-2xl font-bold text-foreground mt-12 mb-4">Badges & Refunds</h2>
             <ul className="text-muted-foreground font-light leading-relaxed space-y-2">
-              <li>All ticket sales are processed securely through Stripe</li>
+              <li>All badge sales are processed securely through Stripe</li>
               <li>Full refunds are available up to 14 days before the event</li>
-              <li>After the 14-day window, tickets are non-refundable but transferable to another person</li>
-              <li>Ticket upgrades are available at any time before the event — pay only the difference</li>
+              <li>After the 14-day window, badges are non-refundable but transferable to another person</li>
+              <li>Badge upgrades are available at any time before the event — pay only the difference</li>
               <li>Group discounts (5+ people: 15% off, 10+ people: 25% off) cannot be applied retroactively</li>
             </ul>
 
@@ -55,7 +55,7 @@ export default function TermsOfService() {
 
             <h2 className="text-2xl font-bold text-foreground mt-12 mb-4">Content & Recordings</h2>
             <p className="text-muted-foreground font-light leading-relaxed">
-              Keynotes and masterclass sessions may be recorded and shared with ticket holders after the event. By attending, you consent to being photographed or recorded for event documentation and marketing purposes. If you do not wish to be photographed, please notify event staff.
+              Keynotes and masterclass sessions may be recorded and shared with badge holders after the event. By attending, you consent to being photographed or recorded for event documentation and marketing purposes. If you do not wish to be photographed, please notify event staff.
             </p>
 
             <h2 className="text-2xl font-bold text-foreground mt-12 mb-4">Liability</h2>
@@ -65,7 +65,7 @@ export default function TermsOfService() {
 
             <h2 className="text-2xl font-bold text-foreground mt-12 mb-4">Event Changes</h2>
             <p className="text-muted-foreground font-light leading-relaxed">
-              We reserve the right to modify the event schedule, speakers, or venue due to circumstances beyond our control. In the unlikely event of a full cancellation, all ticket holders will receive a complete refund.
+              We reserve the right to modify the event schedule, speakers, or venue due to circumstances beyond our control. In the unlikely event of a full cancellation, all badge holders will receive a complete refund.
             </p>
 
             <h2 className="text-2xl font-bold text-foreground mt-12 mb-4">Contact</h2>
