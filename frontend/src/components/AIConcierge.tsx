@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { Sparkles, Send, X, Globe, Building2, User, Zap, Brain, Search, PenLine } from "lucide-react";
+import { Sparkles, Send, X, Globe, Building2, User, Zap, Brain, Search, PenLine, Rocket } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSpatial } from "@/components/spatial/SpatialProvider";
 import { useChatContext, type LoadingStatus } from "@/components/ChatProvider";
@@ -73,6 +73,24 @@ export function AIConcierge() {
     }
   }, [isOpen]);
 
+  const [mobileVp, setMobileVp] = useState<{ h: number; t: number } | null>(null);
+
+  useEffect(() => {
+    if (!isOpen) { setMobileVp(null); return; }
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const update = () => {
+      setMobileVp(window.innerWidth < 640 ? { h: vv.height, t: vv.offsetTop } : null);
+    };
+    update();
+    vv.addEventListener("resize", update);
+    vv.addEventListener("scroll", update);
+    return () => {
+      vv.removeEventListener("resize", update);
+      vv.removeEventListener("scroll", update);
+    };
+  }, [isOpen]);
+
   useEffect(() => {
     if (messages.length > 0) setHasInteracted(true);
   }, [messages.length]);
@@ -113,8 +131,13 @@ export function AIConcierge() {
     <>
       {isOpen && (
         <div
-          className="fixed z-[60] animate-fade-in-up inset-0 sm:inset-auto sm:bottom-24 sm:right-6 sm:w-[400px] sm:max-w-[calc(100vw-3rem)] sm:max-h-[calc(100vh-8rem)]"
-          style={{ animationDelay: "0s" }}
+          className="fixed z-[60] animate-fade-in-up inset-x-0 top-0 sm:inset-auto sm:bottom-24 sm:right-6 sm:w-[400px] sm:max-w-[calc(100vw-3rem)] sm:max-h-[calc(100vh-8rem)]"
+          style={{
+            animationDelay: "0s",
+            ...(mobileVp
+              ? { height: `${mobileVp.h}px`, top: `${mobileVp.t}px` }
+              : { height: "100dvh" }),
+          }}
         >
           <div className="h-full sm:h-auto sm:max-h-[calc(100vh-8rem)] holo-card holo-glow !rounded-none sm:!rounded-2xl overflow-hidden shadow-2xl concierge-panel">
             <div className="relative z-[2] flex flex-col h-full sm:h-auto sm:max-h-[calc(100vh-8rem)]">
@@ -189,6 +212,18 @@ export function AIConcierge() {
                           <div>
                             <span className="font-medium text-foreground">Just curious</span>
                             <span className="block text-[10px] text-muted-foreground">Give me the quick rundown</span>
+                          </div>
+                        </button>
+                        <button
+                          onClick={() => handleQuickAction("I want to submit my project for Demo Day!")}
+                          className="flex items-center gap-3 w-full text-left text-xs px-4 py-3 rounded-xl border border-border hover:border-primary/40 hover:bg-primary/5 text-muted-foreground hover:text-foreground transition-all group"
+                        >
+                          <div className="w-8 h-8 rounded-full bg-violet-500/10 flex items-center justify-center shrink-0 group-hover:bg-violet-500/20 transition-colors">
+                            <Rocket className="w-4 h-4 text-violet-500" />
+                          </div>
+                          <div>
+                            <span className="font-medium text-foreground">Submit my project</span>
+                            <span className="block text-[10px] text-muted-foreground">Register for Demo Day — I'll pull the details from your site</span>
                           </div>
                         </button>
                       </div>

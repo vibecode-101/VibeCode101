@@ -5,8 +5,10 @@ import type { ConfirmForm } from "@/components/ChatProvider";
 const BASE = import.meta.env.BASE_URL;
 
 const CATEGORIES = [
-  "AI Apps", "Developer Tools", "Creative Tools", "Beginner Builds",
-  "Automation", "Mobile Apps", "Games", "Other",
+  "AI Apps", "SaaS", "Developer Tools", "Creative Tools",
+  "Automation", "Mobile Apps", "Games", "Beginner Builds",
+  "Fintech", "EdTech", "HealthTech", "Productivity",
+  "Open Source", "API / Platform", "Browser Extension", "Other",
 ];
 
 interface Props {
