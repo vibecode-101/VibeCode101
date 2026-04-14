@@ -1,7 +1,6 @@
 # Vibe Code 101 — The MasterClass & Expo Event
 
 Premium landing experience for **Vibe Code 101**, a virtual-first global experience && live in-person 3-day coding event in Orlando, FL by [AiAssist.net](https://aiassist.net).
-
 ## Features
 
 - **Spatial Navigation** — WhiteGlove-style door card directory with full-screen room transitions
